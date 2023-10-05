@@ -1,4 +1,4 @@
-import { contactAddSchema } from "../helpers/schems.js"
+import { contactAddSchema } from "../schems/schems.js"
 import { HttpError } from "../helpers/index.js";
 
 
