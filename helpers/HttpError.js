@@ -3,7 +3,7 @@ const messageList = {
     401: "Unauthorized",
     403: "Forbidden",
     404: "Not Found",
-    409: "Confloct",
+    409: "Conflict",
 }
 
 
