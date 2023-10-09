@@ -1,10 +1,10 @@
 import express from 'express';
-import contactsController from '../../controllers/contacts-controllers.js';
+import contactsController from '../../controllers/contacts.js';
 
 import {isEmptyBody, isEmptyFavoriteBody, isValidId} from "../../middlewares/index.js";
 
 import {validateBody} from "../../decorators/index.js";
-import { contactAddSchema, contactUpdateFavoriteSchema} from '../../models/Contact.js';
+import { contactAddSchema, contactUpdateFavoriteSchema} from '../../models/contact.js';
 
 
 const contactAddValidate = validateBody(contactAddSchema);
