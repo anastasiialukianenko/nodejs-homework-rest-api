@@ -1,7 +1,8 @@
 import express from 'express';
 import authController from '../../controllers/auth.js';
 
-import {authenticate, isEmptyBody} from "../../middlewares/index.js";
+import { authenticate, isEmptyBody, isValidUserId } from "../../middlewares/index.js";
+
 
 import {validateBody} from "../../decorators/index.js";
 import { userRegisterSchema, userLoginSchema} from '../../models/user.js';
@@ -20,9 +21,7 @@ authRouter.get("/current", authenticate, authController.getCurrent);
 
 authRouter.post("/logout", authenticate, authController.logout);
 
-// authRouter.patch("/users", authController.updateSubscription);
-
-
+authRouter.patch("/:userId/subscription", isValidUserId, authenticate, isEmptyBody, authController.updateSubscription);
 
 export default authRouter; 
 
