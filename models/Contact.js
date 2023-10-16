@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 import { handleSaveError, runValidatorsAtUpdate } from "./hooks.js";
 import Joi from 'joi';
 
-const contactSchema = new Schema( {
+const contactSchema = new Schema({
     name: {
       type: String,
       required: [true, 'Set name for contact'],
@@ -16,6 +16,11 @@ const contactSchema = new Schema( {
     favorite: {
       type: Boolean,
       default: false,
+  },
+      owner: {
+      type: Schema.Types.ObjectId,
+        ref: 'user',
+      requierd: true,
     },
 }, {versionKey: false, timestamps: true})
   
