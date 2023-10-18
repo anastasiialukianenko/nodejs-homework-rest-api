@@ -66,13 +66,14 @@ async function removeContact(req, res, next) {
   
   const { _id: owner } = req.user;
    
-    const result = await Contact.findOneAndUpdate({ _id: contactId, owner }, req.body);
+    const result = await Contact.findOneAndDelete({ _id: contactId, owner });
  if (!result) {
       throw HttpError(404, `Not Found`);
   };
   res.status(200).json({
     message: "contact deleted"
   })
+
 };
 
 export default {
