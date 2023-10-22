@@ -23,7 +23,7 @@ authRouter.post("/logout", authenticate, authController.logout);
 
 authRouter.patch("/:userId/subscription", isValidUserId, authenticate, isEmptyBody, authController.updateSubscription);
 
-authRouter.patch("/avatar", authenticate, upload.single("avatar"), authController.updateAvatar);
+authRouter.patch("/avatars", authenticate, upload.single("avatar"), authController.updateAvatar);
 
 
 export default authRouter; 
