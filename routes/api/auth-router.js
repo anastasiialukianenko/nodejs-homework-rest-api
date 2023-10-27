@@ -15,6 +15,7 @@ const userEmailValidate = validateBody(userVerifySchema);
 const authRouter = express.Router();
 
 authRouter.post("/register", isEmptyBody, userRegisterValidate, authController.register);
+
 authRouter.get("/verify/:verificationToken", authController.verify);
 
 authRouter.post("/verify", isEmptyBody, userEmailValidate, authController.resendVerifyEmail);

@@ -6,7 +6,7 @@ const { UKR_NET_PASSWORD, UKR_NET_EMAIL } = process.env;
 
 const nodemailerConfig = {
   host: 'smtp.ukr.net',
-  port: 456,
+  port: 465,
   secure: true,
   auth: {
     user: UKR_NET_EMAIL,
@@ -15,17 +15,26 @@ const nodemailerConfig = {
 }
 
 const transport = nodemailer.createTransport(nodemailerConfig);
-// const data = {
-//   to: "dejin72919@wanbeiz.com",
-//   subject: "test email",
-//   html: "<strong>Test email</strong>"
+
+
+// const sendEmail = (data) => {
+//     const email = { ...data, from: UKR_NET_EMAIL };
+//     return transport.sendMail(email)
 // }
 
-// transport.sendMail(email).then(()=> console.log('Email send sucsess')).catch(error => console.log(error.message))
-
 const sendEmail = (data) => {
-    const email = { ...data, from: UKR_NET_EMAIL };
-    return transport.sendMail(email)
-}
+  const email = { ...data, from: UKR_NET_EMAIL };
+  return new Promise((resolve, reject) => {
+    transport.sendMail(email, (error, info) => {
+      if (error) {
+        console.error("Error occurred while sending email:", error);
+        reject(error);
+      } else {
+        console.log("Email sent successfully:", info.response);
+        resolve(info);
+      }
+    });
+  });
+};
 
 export default sendEmail;
