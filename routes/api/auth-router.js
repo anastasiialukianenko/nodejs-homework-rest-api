@@ -5,15 +5,20 @@ import { authenticate, isEmptyBody, isValidUserId, upload } from "../../middlewa
 
 
 import {validateBody} from "../../decorators/index.js";
-import { userRegisterSchema, userLoginSchema} from '../../models/user.js';
+import { userRegisterSchema, userLoginSchema, userVerifySchema} from '../../models/user.js';
 
 const userRegisterValidate = validateBody(userRegisterSchema);
 const userLoginValidate = validateBody(userLoginSchema);
+const userEmailValidate = validateBody(userVerifySchema);
 
 
 const authRouter = express.Router();
 
 authRouter.post("/register", isEmptyBody, userRegisterValidate, authController.register);
+
+authRouter.get("/verify/:verificationToken", authController.verify);
+
+authRouter.post("/verify", isEmptyBody, userEmailValidate, authController.resendVerifyEmail);
 
 authRouter.post("/login", isEmptyBody, userLoginValidate, authController.login);
 

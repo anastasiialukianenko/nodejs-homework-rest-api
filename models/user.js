@@ -26,7 +26,14 @@ const userSchema = new Schema( {
   },
   token: {
     type: String,
-  }
+  },
+  verify: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+  },
 }, {versionKey: false, timestamps: true})
   
 userSchema.pre('findOneAndUpdate', runValidatorsAtUpdate);
@@ -58,6 +65,12 @@ export const userLoginSchema = Joi.object({
         token: Joi.string(),
 })
 
+
+export const userVerifySchema = Joi.object({
+        email: Joi.string().pattern(emailRegexp).required().messages({
+    'any.required': `Missing required field "email"`,
+  }),
+})
 
 export default User;
 
